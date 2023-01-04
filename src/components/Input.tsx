@@ -6,7 +6,6 @@ interface IInput extends IInputProps {
 }
 
 const Input: React.FC<IInput> = ({ showErrorType, ...rest }: IInput) => {
-  console.log('🚀 ~ file: Input.tsx:9 ~ showErrorType', showErrorType)
   return (
     <>
       <NativeBaseInput

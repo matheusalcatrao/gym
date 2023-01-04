@@ -4,6 +4,7 @@ import { VStack, Image, Text, Center } from 'native-base'
 import LogoSvg from '@assets/logo.svg'
 import BackgroundImg from '@assets/background.png'
 import Input from '@components/Input'
+import Button from '@components/Button'
 
 const SignIn: React.FC = () => {
   return (
@@ -21,7 +22,7 @@ const SignIn: React.FC = () => {
         </Text>
       </Center>
       <Center my={24}>
-        <Text color="gray.100" fontSize="xl" mb={10}>
+        <Text color="gray.100" fontSize="xl" fontFamily="body" mb={10}>
           Acesse sua conta
         </Text>
         <Input
@@ -34,6 +35,7 @@ const SignIn: React.FC = () => {
           type="password"
           // showErrorType="senha incorreta"
         />
+        <Button title="Acessar" />
       </Center>
     </VStack>
   )
