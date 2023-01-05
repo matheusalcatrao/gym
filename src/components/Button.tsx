@@ -1,23 +1,34 @@
 import React from 'react'
-import { Button as ButtonNativeBase, Text } from 'native-base'
+import { Button as ButtonNativeBase, Text, IButtonProps } from 'native-base'
 
-interface IButton {
+type IButton = IButtonProps & {
   title: string
+  variant?: 'solid' | 'outline'
 }
 
-const Button: React.FC<IButton> = ({ title, ...rest }: IButton) => {
+const Button: React.FC<IButton> = ({
+  title,
+  variant = 'solid',
+  ...rest
+}: IButton) => {
   return (
     <ButtonNativeBase
       w="full"
       h={14}
-      bg="green.700"
+      bg={variant === 'outline' ? 'transparent' : 'green.700'}
+      borderWidth={variant === 'outline' ? 1 : 0}
+      borderColor="green.700"
       rounded="sm"
       {...rest}
       _pressed={{
-        bg: 'green.500',
+        bg: variant === 'outline' ? 'gray.500' : 'green.500',
       }}
     >
-      <Text color="white" fontFamily="heading" fontSize="sm">
+      <Text
+        color={variant === 'outline' ? 'green.500' : 'white'}
+        fontFamily="heading"
+        fontSize="sm"
+      >
         {title}
       </Text>
     </ButtonNativeBase>
