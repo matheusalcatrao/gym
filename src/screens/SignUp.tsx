@@ -1,5 +1,7 @@
 import React from 'react'
 import { VStack, Image, Text, Center, ScrollView } from 'native-base'
+import auth from '@react-native-firebase/auth'
+import { initializeApp } from 'firebase/app'
 
 import LogoSvg from '@assets/logo.svg'
 import BackgroundImg from '@assets/background.png'
@@ -7,12 +9,25 @@ import Input from '@components/Input'
 import Button from '@components/Button'
 import { useNavigation } from '@react-navigation/native'
 import { AuthNavigationRoutesProps } from '@routes/auth.routes'
+import { firebaseConfig } from '../../firebaseConfig'
 
-const SignIn: React.FC = () => {
+const SignUp = () => {
   const navigation = useNavigation<AuthNavigationRoutesProps>()
 
-  const handleNewAccount = () => {
-    navigation.navigate('signUp')
+  const handleLogin = () => {
+    navigation.navigate('signIn')
+  }
+
+  const handleCreateAccount = async () => {
+    try {
+      await initializeApp(firebaseConfig)
+      const email = 'matheusalcatrao@hotmail.com'
+      const password = '12345'
+
+      await auth().createUserWithEmailAndPassword(email, password)
+    } catch (error) {
+      console.error('Error on handleCreateAccount: ', error)
+    }
   }
 
   return (
@@ -34,26 +49,25 @@ const SignIn: React.FC = () => {
             Treine sua mente e o seu corpo
           </Text>
         </Center>
-        <Center my={24}>
-          <Text color="gray.100" fontSize="xl" fontFamily="body" mb={8}>
-            Acesse sua conta
+        <Center my={30}>
+          <Text color="gray.100" fontSize="xl" fontFamily="body" mb={10}>
+            Crie sua conta
           </Text>
+          <Input placeholder="Nome" />
           <Input
             placeholder="E-mail"
             autoCapitalize="none"
             keyboardType="email-address"
           />
           <Input placeholder="Senha" type="password" />
-          <Button title="Acessar" />
+          <Input placeholder="Confirme  a Senha" type="password" />
+          <Button title="Criar e acessar" onPress={handleCreateAccount} />
         </Center>
-        <Center>
-          <Text color="gray.100" fontSize="sm" fontFamily="body" mb={5}>
-            Ainda não tem acesso?
-          </Text>
+        <Center my={5}>
           <Button
-            title="Criar conta"
+            title="Voltar para o login"
             variant="outline"
-            onPress={handleNewAccount}
+            onPress={handleLogin}
           />
         </Center>
       </VStack>
@@ -61,4 +75,4 @@ const SignIn: React.FC = () => {
   )
 }
 
-export default SignIn
+export default SignUp
