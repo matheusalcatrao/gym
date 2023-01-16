@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { VStack, Image, Text, Center, ScrollView, useToast } from 'native-base'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { Formik } from 'formik'
@@ -10,7 +10,7 @@ import Button from '@components/Button'
 import { useNavigation } from '@react-navigation/native'
 import { AuthNavigationRoutesProps } from '@routes/auth.routes'
 import { auth } from '../../firebaseConfig'
-import userSchema from './SignUp.schema'
+import userSchema from './User.schema'
 import ErrorType from 'src/types/ErrorType'
 
 type formValues = {
